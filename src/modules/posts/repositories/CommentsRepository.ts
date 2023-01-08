@@ -1,15 +1,16 @@
 import ICommentDTO from '@modules/posts/dtos/ICommentDTO';
-import { getRepository, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
 import Comment from '@modules/posts/entities/Comment';
 import ICommentsRepository from '@modules/posts/repositories/ICommentsRepository';
 import IObjectDTO from '@dtos/IObjectDTO';
+import { AppDataSource } from '../../../../dataSource';
 
 export default class CommentsRepository implements ICommentsRepository {
   private ormRepository: Repository<Comment>;
 
   constructor() {
-    this.ormRepository = getRepository(Comment);
+    this.ormRepository = AppDataSource.getRepository(Comment);
   }
 
   public async findBy(

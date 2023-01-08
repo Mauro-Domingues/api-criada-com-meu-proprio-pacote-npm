@@ -1,9 +1,9 @@
 import request from 'supertest';
-import { Connection } from 'typeorm';
+import { DataSource } from 'typeorm';
 import createConnection from '@shared/typeorm';
 import app from '@shared/app';
 
-let connection: Connection;
+let connection: DataSource;
 
 describe('DeleteCommentController', () => {
   beforeAll(async () => {
@@ -21,7 +21,7 @@ describe('DeleteCommentController', () => {
 
   afterAll(async () => {
     await connection.dropDatabase();
-    await connection.close();
+    await connection.destroy();
   });
 
   it('Should be able to delete a comment', async () => {

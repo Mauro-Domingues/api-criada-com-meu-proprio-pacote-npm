@@ -1,15 +1,16 @@
 import IReactionDTO from '@modules/posts/dtos/IReactionDTO';
-import { getRepository, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
 import Reaction from '@modules/posts/entities/Reaction';
 import IReactionsRepository from '@modules/posts/repositories/IReactionsRepository';
 import IObjectDTO from '@dtos/IObjectDTO';
+import { AppDataSource } from '../../../../dataSource';
 
 export default class ReactionsRepository implements IReactionsRepository {
   private ormRepository: Repository<Reaction>;
 
   constructor() {
-    this.ormRepository = getRepository(Reaction);
+    this.ormRepository = AppDataSource.getRepository(Reaction);
   }
 
   public async findBy(

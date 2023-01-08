@@ -1,15 +1,16 @@
 import IPostDTO from '@modules/posts/dtos/IPostDTO';
-import { getRepository, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
 import Post from '@modules/posts/entities/Post';
 import IPostsRepository from '@modules/posts/repositories/IPostsRepository';
 import IObjectDTO from '@dtos/IObjectDTO';
+import { AppDataSource } from '../../../../dataSource';
 
 export default class PostsRepository implements IPostsRepository {
   private ormRepository: Repository<Post>;
 
   constructor() {
-    this.ormRepository = getRepository(Post);
+    this.ormRepository = AppDataSource.getRepository(Post);
   }
 
   public async findBy(

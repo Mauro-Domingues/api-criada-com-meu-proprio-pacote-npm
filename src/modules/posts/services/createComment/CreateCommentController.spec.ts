@@ -1,10 +1,10 @@
 import request from 'supertest';
-import { Connection } from 'typeorm';
+import { DataSource } from 'typeorm';
 
 import app from '@shared/app';
 import createConnection from '@shared/typeorm';
 
-let connection: Connection;
+let connection: DataSource;
 
 describe('CreateCommentController', () => {
   beforeAll(async () => {
@@ -18,7 +18,7 @@ describe('CreateCommentController', () => {
 
   afterAll(async () => {
     await connection.dropDatabase();
-    await connection.close();
+    await connection.destroy();
   });
 
   it('Should be able to create a comment', async () => {
