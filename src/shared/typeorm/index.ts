@@ -1,9 +1,9 @@
-import { DataSource, createConnection } from 'typeorm';
+import { DataSource } from 'typeorm';
 
 import { AppDataSource } from '../../../dataSource';
 
 export default async (): Promise<DataSource> => {
-  return createConnection(AppDataSource.options);
+  return AppDataSource.initialize();
 };
 
 // Image examples

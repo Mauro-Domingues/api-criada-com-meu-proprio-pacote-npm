@@ -10,14 +10,14 @@ describe('ListPostController', () => {
     connection = await createConnection();
     await connection.runMigrations();
 
-    await connection.query(
+    return connection.query(
       `INSERT INTO posts(id, title, description, slug) values('12345', 'post', 'This is a post', 'post')`,
     );
   });
 
   afterAll(async () => {
     await connection.dropDatabase();
-    await connection.destroy();
+    return connection.destroy();
   });
 
   it('Should be able to list posts', async () => {

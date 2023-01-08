@@ -14,14 +14,14 @@ describe('UpdateCommentController', () => {
       `INSERT INTO posts(id, title, description, slug) values('12345', 'post', 'This is a post', 'post')`,
     );
 
-    await connection.query(
+    return connection.query(
       `INSERT INTO comments(id, comment, post_id) values('12345','This is a comment', '12345')`,
     );
   });
 
   afterAll(async () => {
     await connection.dropDatabase();
-    await connection.destroy();
+    return connection.destroy();
   });
 
   it('Should be able to update comments', async () => {

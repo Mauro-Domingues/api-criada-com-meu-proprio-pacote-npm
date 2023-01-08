@@ -9,12 +9,12 @@ let connection: DataSource;
 describe('CreatePostController', () => {
   beforeAll(async () => {
     connection = await createConnection();
-    await connection.runMigrations();
+    return connection.runMigrations();
   });
 
   afterAll(async () => {
     await connection.dropDatabase();
-    await connection.destroy();
+    return connection.destroy();
   });
 
   it('Should be able to create a post', async () => {

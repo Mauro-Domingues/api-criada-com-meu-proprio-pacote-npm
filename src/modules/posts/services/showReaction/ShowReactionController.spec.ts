@@ -21,7 +21,7 @@ describe('ShowReactionController', () => {
 
   afterAll(async () => {
     await connection.dropDatabase();
-    await connection.destroy();
+    return connection.destroy();
   });
 
   it('Should be able to show reactions', async () => {

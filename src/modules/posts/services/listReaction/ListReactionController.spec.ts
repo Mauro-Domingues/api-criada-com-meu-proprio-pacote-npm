@@ -14,14 +14,14 @@ describe('ListReactionController', () => {
       `INSERT INTO posts(id, title, description, slug) values('12345', 'post', 'This is a post', 'post')`,
     );
 
-    await connection.query(
+    return connection.query(
       `INSERT INTO reactions(id, reaction, post_id) values('12345', 'This is a reaction', '12345')`,
     );
   });
 
   afterAll(async () => {
     await connection.dropDatabase();
-    await connection.destroy();
+    return connection.destroy();
   });
 
   it('Should be able to list reactions', async () => {
